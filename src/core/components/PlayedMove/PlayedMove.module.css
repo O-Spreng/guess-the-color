@@ -1,0 +1,56 @@
+.container {
+  padding: 8px 16px;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.even {
+  background: #dbdee4;
+}
+.guessed,
+.correct,
+.matching {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #919295;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.guessed,
+.correct {
+  width: 40%;
+}
+.matching {
+  width: 80%;
+}
+.score {
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 20%;
+  gap: 4px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.score span {
+  border-radius: 100%;
+  text-align: center;
+  height: 24px;
+  width: 24px;
+}
+.right {
+  border: 2px solid #255427;
+  background: #7bdb80;
+  color: #255427;
+}
+.wrong {
+  border: 2px solid #511010;
+  background: #fb3737;
+  color: #511010;
+}

@@ -1,0 +1,27 @@
+.container {
+  background: #aeaeae;
+  margin: 32px auto;
+  padding: 32px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 8px ridge #4b4b4b;
+  border-radius: 4px;
+}
+
+.container p {
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', cursive;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+
+.container p:hover{
+  color: #4B4B4BA9;
+  text-shadow: -2px -2px 0 #484848;
+}

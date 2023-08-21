@@ -1,0 +1,19 @@
+.container {
+  width: 35%;
+  background: transparent;
+  text-align: center;
+  height: 100%;
+  line-height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.value {
+  font-family: 'Press Start 2P', cursive;
+}
+

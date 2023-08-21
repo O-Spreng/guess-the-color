@@ -1,0 +1,41 @@
+/*.backdrop {*/
+/*  z-index: 9;*/
+/*  width: 100vw;*/
+/*  height: 100vh;*/
+/*  background-color: rgba(0,0,0, 0.42);*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
+
+.container {
+  z-index: 10;
+  height: 30vh;
+  width: 45vh;
+  display: flex;
+  background: transparent;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.container h2 {
+  color: #00ffff;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-shadow: 3px 3px 2px rgba(253, 69, 252, 1),4px 4px 17px rgba(0, 0, 0, 0.85);
+}
+
+.container p {
+  color: #00ffff;
+  font-size: 8em;
+  font-weight: bold;
+  text-shadow: 3px 3px 2px rgba(253, 69, 252, 1),4px 4px 17px rgba(0, 0, 0, 0.85);
+}
+
+

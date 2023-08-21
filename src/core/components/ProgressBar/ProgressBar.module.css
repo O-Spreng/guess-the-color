@@ -1,0 +1,13 @@
+.container {
+  width: 80%;
+  height: 16px;
+  background: #959595;
+  border-radius: 2px;
+  border: 1px solid #4b4b4b;
+  padding: 2px;
+}
+
+.progress {
+  height: 100%;
+  transition: width .5s ease-in-out, color .5s ease-in;
+}

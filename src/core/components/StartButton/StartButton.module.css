@@ -1,0 +1,25 @@
+.container {
+  margin: 0;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: #c6c6c6;
+  height: 100%;
+  border-right: 2px solid #919295;
+  border-left: 2px solid #919295;
+  cursor: pointer;
+  transition: background .2s ease-in, color .2s ease-in;
+}
+
+.btn {
+  font-family: 'Press Start 2P', cursive;
+  /*font-weight: bold;*/
+  color: inherit;
+}
+
+.container:hover {
+  background: #7bdb80;
+  color: #255427;
+}
