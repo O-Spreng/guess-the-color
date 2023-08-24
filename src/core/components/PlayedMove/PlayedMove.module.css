@@ -7,13 +7,13 @@
   gap: 16px;
   justify-content: space-between;
 }
-
-.even {
+.odd {
   background: #dbdee4;
 }
 .guessed,
 .correct,
 .matching {
+  text-transform: uppercase;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,9 +34,11 @@
   display: flex;
   flex-flow: row nowrap;
   width: 20%;
+  min-width: 84px;
   gap: 4px;
   align-items: center;
   justify-content: space-evenly;
+  font-family: 'Press Start 2P', cursive;
 }
 .score span {
   border-radius: 100%;

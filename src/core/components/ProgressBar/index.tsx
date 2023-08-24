@@ -2,20 +2,28 @@ import React from 'react';
 
 import styles from './ProgressBar.module.css'
 
-function ProgressBar() {
-  let progressValue = 25;
-  const progress = progressValue + '%'
+const ProgressBar: React.FC<{progress: number}> = (props: any) => {
+  let {progress} = props;
+
+  let progressValue = progress + '%'
   let bgColor = '#61fb37';
-  if (progressValue < 50) {
-    bgColor= '#fb9a37';
+
+  if (!progress) {
+    progress = 0;
   }
-  if (progressValue < 30) {
+  if (progress > 100) {
+    progress = 100;
+  }
+  if (progress < 50) {
+    bgColor= '#fb8237';
+  }
+  if (progress < 30) {
     bgColor= '#fb3737';
   }
 
   return (
     <div className={styles.container}>
-      <div className={styles.progress} style={{width: progress, background: bgColor }} />
+      <div className={styles.progress} style={{width: progressValue, background: bgColor }} />
     </div>
   );
 }

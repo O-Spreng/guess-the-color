@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 
+import {defaultProps} from '@/core/types';
 import styles from './Backdrop.module.css';
 
-function Backdrop(props:any) {
+const Backdrop:React.FC<defaultProps> = (props) => {
   return (
     <div className={styles.backdrop}>
       {props.children}
