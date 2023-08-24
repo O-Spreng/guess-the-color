@@ -16,4 +16,7 @@
 .value {
   font-family: 'Press Start 2P', cursive;
 }
+.warn {
+  color: #fb3737;
+}
 

@@ -1,16 +1,3 @@
-.container {
-  display: flex;
-  flex-flow: row nowrap;
-  max-width: 45vh;
-  width: 100%;
-  height: 84px;
-  border: 2px solid #919295;
-  border-radius: 8px;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-  background: #f3f3f3;
-}
 .scores {
   height: 100%;
   display: flex;
@@ -18,6 +5,11 @@
   justify-content: space-evenly;
   width: 35%;
   background: transparent;
+}
+.scores hr {
+  width: 100%;
+  border: none;
+  border-top: 2px solid #919295;
 }
 .scoreRow {
   height: 100%;
