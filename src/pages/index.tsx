@@ -1,9 +1,9 @@
-import App from "../core/layout/App";
+import MainMenu from "@/App/menu/presentation/pages/MainMenu";
 
-export default function Home() {
+export default function Menu() {
   return (
     <>
-      <App />
+      <MainMenu />
     </>
   )
 }
