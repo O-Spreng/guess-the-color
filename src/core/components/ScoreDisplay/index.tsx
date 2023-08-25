@@ -1,10 +1,10 @@
 import React from 'react';
 
 import styles from './ScoreDisplay.module.css'
+import {useGameContext} from "@/core/context/GameContext";
 
 const ScoreDisplay = () => {
-  const score = 2
-  const highScore = 12;
+  const {highScore, match} = useGameContext();
 
   return (
     <>
@@ -16,7 +16,7 @@ const ScoreDisplay = () => {
         <hr />
         <div className={styles.scoreRow}>
           <p>SCORE</p>
-          <p className={styles.value}>{score}</p>
+          <p className={styles.value}>{match.currentScore}</p>
         </div>
       </div>
     </>

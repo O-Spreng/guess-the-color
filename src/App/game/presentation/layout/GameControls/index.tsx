@@ -3,15 +3,15 @@ import ControlButton from "@/core/components/ControlButton";
 
 import styles from './GameControls.module.css';
 import {shuffleArray} from "@/core/services";
+import {GameStatus} from "@/core/utils/enums";
+import {useGameContext} from "@/core/context/GameContext";
 
-// TODO: connect with right answer
 // TODO: add one or two extra answers according to difficulty level
-// TODO: controls should only appear if game is started;
 
 const GameControls: React.FC = () => {
-  let colors = ['#FAFAFA', '#A34BC2', '#24093A'];
+  const { currentGameStatus, colors} = useGameContext();
 
-
+  if (currentGameStatus !== GameStatus.InGame) return <></>;
   return (
     <>
       <div className={styles.container}>

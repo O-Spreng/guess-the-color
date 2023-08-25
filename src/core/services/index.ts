@@ -1,4 +1,3 @@
-
 export function getLegibleTextColor(hexColor: string) {
   const r = parseInt(hexColor.slice(1, 3), 16);
   const g = parseInt(hexColor.slice(3, 5), 16);
@@ -10,7 +9,10 @@ export function getLegibleTextColor(hexColor: string) {
 }
 
 export const generateRandomColor = () => {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  const randomColorNumber = Math.floor(Math.random() * 0xFFFFFF);
+  const hexColor = randomColorNumber.toString(16).padStart(6, '0');
+
+  return `#${hexColor}`
 };
 
 export function shuffleArray(array: Array<any>) {

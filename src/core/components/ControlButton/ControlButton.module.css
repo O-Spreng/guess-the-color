@@ -4,6 +4,7 @@
   border-radius: 8px;
   font-weight: 400;
   background: #fffdf6;
+  text-transform: uppercase;
   transition: background .2s ease-in, font-weight .2s ease-in, color .2s ease-in;
 }
 

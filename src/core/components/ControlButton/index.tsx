@@ -1,30 +1,24 @@
 import React, {useEffect, useState} from 'react';
 
 import styles from './ControlButton.module.css'
-
-// TODO: change animate function
+import {useGameContext} from "@/core/context/GameContext";
 
 const ControlButton: React.FC<{color: string}> = (props) => {
+  const {correctColor, selectColor} = useGameContext();
   const [shouldBlink, setShouldBlink] = useState<boolean>();
-  const [blinkStyle, setBlinkStyle] =  useState<string>();
-  let selectedRight = false
   const {color}  = props;
+  const isRightColor = color === correctColor;
+  const blinkStyle = shouldBlink ? (isRightColor ? styles.right : styles.wrong) : '';
 
   useEffect(() => {
     if (shouldBlink) {
-      selectedRight ? setBlinkStyle(styles.right) : setBlinkStyle(styles.wrong);
+      const blinkTimeout = setTimeout(() => {
+        selectColor(color);
+        setShouldBlink(false);
+      }, 500);
     }
 
-    const timeoutId = setTimeout(() => {
-      setBlinkStyle('');
-      setShouldBlink(false);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-
-  }, [shouldBlink, selectedRight]);
+  }, [shouldBlink]);
 
   return (
     <button onClick={() => setShouldBlink(true)} className={`${styles.container} ${blinkStyle}`}>

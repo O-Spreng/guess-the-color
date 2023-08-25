@@ -6,16 +6,16 @@ import {GameStatus} from "@/core/utils/enums";
 import {useGameContext} from "@/core/context/GameContext";
 
 function GameField() {
-  const {currentGameStatus, currAttemptTimer } = useGameContext();
+  const {currentGameStatus, currentAttemptTimer, correctColor } = useGameContext();
   let currentColor:{};
-  currentColor = currentGameStatus !== GameStatus.InGame ?  {} : { background: '#FBC00C'}
-  let prog = ( currAttemptTimer / 10) * 100 ;
+  currentColor = currentGameStatus !== GameStatus.InGame ?  {} : { background: correctColor}
+  let progress = ( currentAttemptTimer / 10) * 100 ;
 
 
   return (
     <>
       <div className={styles.container} style={currentColor}>
-        {currentGameStatus === GameStatus.InGame ? <ProgressBar progress={Number(prog.toFixed(2))}/> : <></>}
+        {currentGameStatus === GameStatus.InGame ? <ProgressBar progress={Number(progress.toFixed(2))}/> : <></>}
       </div>
     </>
   );

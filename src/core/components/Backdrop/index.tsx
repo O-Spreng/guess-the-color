@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 
-import {defaultProps} from '@/core/types';
+import {defaultProps} from '../../utils/types';
 import styles from './Backdrop.module.css';
 
 const Backdrop:React.FC<defaultProps> = (props) => {

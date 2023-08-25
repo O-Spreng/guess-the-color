@@ -7,12 +7,17 @@ import {GameStatus} from "@/core/utils/enums";
 
 function StartTimer() {
   const [seconds, setSeconds] = useState(4);
-  const {setCurrentGameStatus, setShowStartTimer} = useGameContext();
+  const {currentGameStatus, setCurrentGameStatus, setShowStartTimer, startNewMatch} = useGameContext();
 
   useEffect(() => {
 
-    if (seconds === 0) {
-      setCurrentGameStatus(GameStatus.InGame);
+    if (seconds === 0 && currentGameStatus !== GameStatus.Paused) {
+      startNewMatch();
+      setShowStartTimer(false);
+    }
+
+    if (seconds === 0 && currentGameStatus === GameStatus.Paused) {
+      setCurrentGameStatus(GameStatus.InGame, 'pause')
       setShowStartTimer(false);
     }
 
@@ -25,7 +30,7 @@ function StartTimer() {
         clearInterval(interval)
       };
     }
-  }, [seconds, setCurrentGameStatus, setShowStartTimer]);
+  }, [currentGameStatus, seconds, setCurrentGameStatus, setShowStartTimer, startNewMatch]);
 
   return (
     <Backdrop>
