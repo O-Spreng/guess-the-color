@@ -1,5 +1,5 @@
 import React from 'react';
-import Game from "@/App/game/presentation/pages/Game";
+import Game from "../App/UI/pages/Game";
 
 function Arcade() {
   return (

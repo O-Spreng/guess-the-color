@@ -1,5 +1,5 @@
 import React from 'react';
-import LeaderboardPage from "@/App/leaderboard/presentation/page/LeaderboardPage";
+import LeaderboardPage from "../App/UI/pages/LeaderboardPage";
 
 function Leaderboard() {
   return (

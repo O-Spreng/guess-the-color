@@ -1,5 +1,5 @@
 import React from 'react';
-import InstructionsPage from "@/core/static/pages/InstructionsPage";
+import InstructionsPage from "../App/UI/pages/InstructionsPage";
 
 function Instructions() {
   return (

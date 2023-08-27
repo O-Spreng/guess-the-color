@@ -1,4 +1,4 @@
-import MainMenu from "@/App/menu/presentation/pages/MainMenu";
+import MainMenu from "../App/UI/pages/MainMenu";
 
 export default function Menu() {
   return (
