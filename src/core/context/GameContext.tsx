@@ -110,7 +110,6 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
 
 
 
-  // TODO: CORRIGIR ESSA FUNÇÃO INUTIL
   function handleStatusChange( origin: string) {
     if (currentGameStatus === GameStatus.Stopped && origin === 'start') {
       setShowStartTimer(true);
