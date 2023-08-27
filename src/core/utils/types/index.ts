@@ -21,7 +21,6 @@ export type Match = {
   player: string,
   currentScore: number,
   currentMatchMoves: Array<Move>,
-  gameMode: GameMode,
 }
 
 export type GameContextObject = {
@@ -44,8 +43,8 @@ export type GameContextObject = {
   setCurrentAttemptTimer: (value: number) => void,
   selectColor: (color: string) => void,
   startNewMatch: () => void,
+  resetAllData: () => void
 }
-
 
 export type OptionsContextObject = {
   gameDifficulty: GameDifficulty, // (EASY || MEDIUM | HARD)
@@ -56,4 +55,10 @@ export type OptionsContextObject = {
   setPlayer: () => void,
   isFirstSession: boolean,
   setIsFirstSession:  () => void,
+}
+
+export type GameRecord = {
+  highScore: number,
+  scoreBreakingMatches: Array<Match>,
+  lastPlayedMatch: Match
 }

@@ -1,15 +1,24 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import {GameDifficulty, GameStatus} from "@/core/utils/enums";
-import {GameContextObject, GameContextProviderProps, Match, Move} from "../utils/types";
+import {defaultProps, GameContextObject, Match, Move} from "@/core/utils/types";
 import {generateRandomColor, shuffleArray} from "@/core/services";
+import {
+  getFirstAccess,
+  getHighScoreFromStorage,
+  getLastMatchFromStorage,
+  resetAllData, setFirstAccess,
+  setHighScoreToStorage,
+  setLastMatchToStorage,
+  setLeaderboardToStorage
+} from "@/core/services/GameStorageProvider";
 
 
 const GameContext = createContext<GameContextObject>({
   difficulty: GameDifficulty.Easy,
-  highScore: 0, //get from localStorage && check gameMode
+  highScore: 0,
   attempt: {} as Move,
   match: {} as Match,
-  lastMatch: {} as Match, //get from localStorage
+  lastMatch: {} as Match,
   colors: [] as string[],
   correctColor: '',
   currentGameStatus: GameStatus.Stopped,
@@ -30,13 +39,14 @@ const GameContext = createContext<GameContextObject>({
   selectColor: (color: string) => {
   },
   startNewMatch: () => {
+  },
+  resetAllData: () => {
   }
 });
 
-export const GameContextProvider: React.FC<GameContextProviderProps> = (props) => {
-  const {mode, children} = props;
+export const GameContextProvider: React.FC<defaultProps> = (props) => {
   let emptyAttempt: Move = {selectedColor: '', expectedColor: '', elapsedTime: 0};
-  let emptyMatch: Match = {id: '', player: '', currentScore: 0, currentMatchMoves: [] as Move[], gameMode: mode}
+  let emptyMatch: Match = {id: '', player: '', currentScore: 0, currentMatchMoves: [] as Move[]}
   const [currentGameStatus, setCurrentGameStatus] = useState<GameStatus>(GameStatus.Stopped);
   const [showStartTimer, setShowStartTimer] = useState<boolean>(false);
   const [showPauseInterface, setShowPauseInterface] = useState<boolean>(false);
@@ -46,12 +56,18 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = (props) =
   const [correctColor, setCorrectColor] = useState<string>('#FFFFFF');
   const [attempt, setAttempt] = useState<Move>(emptyAttempt);
   const [match, setMatch] = useState<Match>(emptyMatch);
-  const [lastMatch, setLastMatch] = useState<Match>(emptyMatch); //get lastMatch from localstorage
+  const [lastMatch, setLastMatch] = useState<Match>(emptyMatch);
   const [difficulty, setDifficulty] = useState<GameDifficulty>(GameDifficulty.Easy)
-  const [highScore, setHighScore] = useState<number>(0)
-  // const [, set] = useState()
+  const [highScore, setHighScore] = useState<number>(0);
 
-  // initialize timer
+  useEffect(() => {
+    if (getFirstAccess() === 0) {
+      setFirstAccess();
+      resetAllData();
+    }
+    setHighScore(getHighScoreFromStorage());
+    setLastMatch(getLastMatchFromStorage());
+  }, []);
 
   useEffect(() => {
     let matchInterval: any;
@@ -75,26 +91,18 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = (props) =
       }
       let updatedScore = match.currentScore > 1 ? match.currentScore -= 2 : 0;
       setMatch({...match,currentScore:updatedScore, currentMatchMoves: [emptyAttempt, ...match.currentMatchMoves]});
-
-    }
-
-    if (currAttemptTimer === 0) {
       startNewAttempt();
     }
 
-    if (currMatchTimer === 0) {
-      match.currentScore > highScore && setHighScore(match.currentScore);
-      clearInterval(matchInterval);
-      clearInterval(attemptInterval);
-      setCurrentGameStatus(GameStatus.Stopped);
-      setLastMatch(match);
+    if (currMatchTimer === 0 && currentGameStatus === GameStatus.InGame) {
+      endCurrentMatch()
     }
 
     return () => {
       clearInterval(matchInterval);
       clearInterval(attemptInterval);
     }
-  }, [currMatchTimer, currAttemptTimer, currentGameStatus, match, startNewAttempt, selectColor, highScore]);
+  }, [currMatchTimer, currAttemptTimer, currentGameStatus, match, startNewAttempt, selectColor, highScore, resetAllData]);
 
 
   function handleStatusChange(status: GameStatus, origin: string) {
@@ -128,22 +136,38 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = (props) =
     setColors(shuffleArray(generatedColors));
   }
 
+  // function saveMatchToLeaderboard(username: string) {
+  function saveMatchToLeaderboard() {
+    //set showPlayerPrompt false
+    let name = ''
+    setHighScore(match.currentScore);
+    setHighScoreToStorage(match.currentScore);
+    setLeaderboardToStorage({...match, player:name});
+  }
+
+  function endCurrentMatch() {
+    setCurrentGameStatus(GameStatus.Stopped);
+    setLastMatch(match);
+    setLastMatchToStorage(match);
+    if (match.currentScore > highScore) {
+      //set showPlayerPrompt true
+      saveMatchToLeaderboard();
+    }
+  }
+
   function startNewMatch() {
     setCurrMatchTimer(30);
     const idGen = new Date();
     const id = idGen.getTime().toString(16);
-    console.log(id);
     let newMatch: Match = {
       id: id,
       player: '',
       currentScore: 0,
       currentMatchMoves: [] as Move[],
-      gameMode: mode
     }
     setCurrentGameStatus(GameStatus.InGame);
     setMatch(prevState => newMatch);
-    startNewAttempt();
-  }
+    startNewAttempt();}
 
   function selectColor(color: string) {
     let currentAttempt: Move = {
@@ -188,12 +212,13 @@ export const GameContextProvider: React.FC<GameContextProviderProps> = (props) =
     setCurrentMatchTimer: setCurrMatchTimer,
     setCurrentAttemptTimer: setCurrAttemptTimer,
     selectColor: selectColor,
-    startNewMatch: startNewMatch
+    startNewMatch: startNewMatch,
+    resetAllData: resetAllData
   }
 
   return (
     <GameContext.Provider value={contextValue}>
-      {children}
+      {props.children}
     </GameContext.Provider>
   )
 }

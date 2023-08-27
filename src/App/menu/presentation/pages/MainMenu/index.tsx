@@ -19,9 +19,6 @@ function MainMenu() {
         <Link href={'/arcade'} className={styles.btn}>
           Arcade Mode
         </Link>
-        <Link href={'/survival'} className={styles.btn}>
-          Survival Mode
-        </Link>
         <Link href={'leaderboard'} className={styles.btn}>
           Leaderboard
         </Link>

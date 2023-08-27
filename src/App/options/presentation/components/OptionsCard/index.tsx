@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import Backdrop from "@/core/components/Backdrop";
-import Nickname from "../../../../../core/components/Input";
+import Input from "../../../../../core/components/Input";
 
 import styles from './OptionsCard.module.css'
 import {GameDifficulty} from "@/core/utils/enums";
+import {useGameContext} from "@/core/context/GameContext";
 
 // TODO: Receive props show:boolean
 // TODO: finish styling the menu
@@ -13,6 +14,7 @@ import {GameDifficulty} from "@/core/utils/enums";
 // TODO: Make Reset All Data clear localstorage
 
 function OptionsCard() {
+  const {resetAllData}= useGameContext();
   const [active, setActive] = useState<string>()
 
   return (
@@ -20,7 +22,7 @@ function OptionsCard() {
       <div className={styles.container}>
         <button className={styles.closeBtn}>close</button>
         <h2 className={styles.title}>Game Options</h2>
-        <Nickname/>
+        <Input/>
         <div className={styles.difficulty}>
           <p>Difficulty</p>
           <div className={styles.btnGroup}>
@@ -40,7 +42,7 @@ function OptionsCard() {
           <p>DANGER ZONE</p>
           <span>&#9762;</span>
         </div>
-        <button className={styles.reset}>Reset all data</button>
+        <button className={styles.reset} onClick={resetAllData}>Reset all data</button>
       </div>
     </Backdrop>
   );

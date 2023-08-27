@@ -9,12 +9,15 @@ export function getLegibleTextColor(hexColor: string) {
 }
 
 export const generateRandomColor = () => {
-  const randomColorNumber = Math.floor(Math.random() * 0xFFFFFF);
-  const hexColor = randomColorNumber.toString(16).padStart(6, '0');
+  const letters = '0123456789ABCDEF';
+  let color = '#';
 
-  return `#${hexColor}`
-};
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
 
+  return color;
+}
 export function shuffleArray(array: Array<any>) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
