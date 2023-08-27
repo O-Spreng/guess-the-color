@@ -3,10 +3,13 @@ import {GameDifficulty, GameStatus} from "@/core/utils/enums";
 import {defaultProps, GameContextObject, Match, Move} from "@/core/utils/types";
 import {generateRandomColor, shuffleArray} from "@/core/services";
 import {
-  getFirstAccess, getGameDifficulty,
+  getFirstAccess,
+  getGameDifficulty,
   getHighScoreFromStorage,
   getLastMatchFromStorage,
-  resetAllData, setFirstAccess, setGameDifficulty,
+  resetAllData,
+  setFirstAccess,
+  setGameDifficulty,
   setHighScoreToStorage,
   setLastMatchToStorage,
   setLeaderboardToStorage
@@ -25,6 +28,7 @@ const GameContext = createContext<GameContextObject>({
   showStartTimer: false,
   showOptionsMenu: false,
   showPauseInterface: false,
+  showPlayerPromptModal: false,
   currentMatchTimer: 30,
   currentAttemptTimer: 10,
   setDifficulty: (newDifficulty: GameDifficulty) => {},
@@ -32,6 +36,7 @@ const GameContext = createContext<GameContextObject>({
   setShowStartTimer: (show: boolean) => {},
   setShowOptionsMenu: (show: boolean) => {},
   setShowPauseInterface: (show: boolean) => {},
+  setShowPlayerPromptModal: (username: string) => {},
   setCurrentMatchTimer: (value: number) => {},
   setCurrentAttemptTimer: (value: number) => {},
   selectColor: (color: string) => {},
@@ -46,6 +51,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
   const [showStartTimer, setShowStartTimer] = useState<boolean>(false);
   const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
   const [showPauseInterface, setShowPauseInterface] = useState<boolean>(false);
+  const [showPlayerPromptModal, setShowPlayerPromptModal] = useState<boolean>(false);
   const [currMatchTimer, setCurrMatchTimer] = useState<number>(0);
   const [currAttemptTimer, setCurrAttemptTimer] = useState<number>(0);
   const [colors, setColors] = useState<string[]>(['#FFFFFF', '#FFFFFF', '#FFFFFF']);
@@ -55,7 +61,6 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
   const [lastMatch, setLastMatch] = useState<Match>(emptyMatch);
   const [difficulty, setDifficulty] = useState<GameDifficulty>(GameDifficulty.Easy)
   const [highScore, setHighScore] = useState<number>(0);
-
 
   useEffect(() => {
     if (getFirstAccess() === 0) {
@@ -120,6 +125,10 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
 
     if (currentGameStatus === GameStatus.Paused && origin === 'pause') {
       setShowPauseInterface(false)
+      setShowStartTimer(true);
+    }
+
+    if (currentGameStatus === GameStatus.Paused && origin === 'start_timer') {
       setCurrentGameStatus(GameStatus.InGame);
     }
 
@@ -147,13 +156,11 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     setColors(shuffleArray(generatedColors));
   }
 
-  // function saveMatchToLeaderboard(username: string) {
-  function saveMatchToLeaderboard() {
-    //set showPlayerPrompt false
-    let name = ''
+  function saveMatchToLeaderboard(username: string) {
+    setShowPlayerPromptModal(false);
     setHighScore(match.currentScore);
     setHighScoreToStorage(match.currentScore);
-    setLeaderboardToStorage({...match, player:name});
+    setLeaderboardToStorage({...match, player:username});
   }
 
   function endCurrentMatch() {
@@ -161,8 +168,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     setLastMatch(match);
     setLastMatchToStorage(match);
     if (match.currentScore > highScore) {
-      //set showPlayerPrompt true
-      saveMatchToLeaderboard();
+      setShowPlayerPromptModal(true);
     }
   }
 
@@ -223,6 +229,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     showStartTimer: showStartTimer,
     showOptionsMenu: showOptionsMenu,
     showPauseInterface: showPauseInterface,
+    showPlayerPromptModal: showPlayerPromptModal,
     currentMatchTimer: currMatchTimer,
     currentAttemptTimer: currAttemptTimer,
     setDifficulty: setDifficulty,
@@ -232,6 +239,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     setShowPauseInterface: setShowPauseInterface,
     setCurrentMatchTimer: setCurrMatchTimer,
     setCurrentAttemptTimer: setCurrAttemptTimer,
+    setShowPlayerPromptModal: saveMatchToLeaderboard,
     selectColor: selectColor,
     startNewMatch: startNewMatch,
     resetAllData: destroyStoredData

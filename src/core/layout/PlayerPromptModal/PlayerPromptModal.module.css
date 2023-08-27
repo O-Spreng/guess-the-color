@@ -1,0 +1,31 @@
+.closeBtn {
+  align-self: flex-end;
+  justify-self: flex-start;
+  text-transform: uppercase;
+}
+
+.closeBtn:hover{
+  color: #4B4B4BA9;
+  text-shadow: -2px -2px 0 #484848;
+}
+
+.title {
+  margin-top: 32px;
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 5s ease-in-out infinite;
+  background-size: 400% 100%;
+  text-shadow: -2px -2px 0 #3F3F3F;
+}
+
+@keyframes rainbow_animation {
+  0%,100% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 100% 0;
+  }
+}

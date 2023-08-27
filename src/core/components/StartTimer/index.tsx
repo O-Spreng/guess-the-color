@@ -17,7 +17,8 @@ function StartTimer() {
     }
 
     if (seconds === 0 && currentGameStatus === GameStatus.Paused) {
-      setCurrentGameStatus(GameStatus.InGame, 'pause')
+      console.log('go')
+      setCurrentGameStatus('start_timer');
       setShowStartTimer(false);
     }
 

@@ -7,9 +7,10 @@ import styles from './Game.module.css';
 import AppLayout from "@/core/layout/AppLayout";
 import OptionsCard from "@/App/options/presentation/components/OptionsCard";
 import {useGameContext} from "@/core/context/GameContext";
+import PlayerPromptModal from "@/core/layout/PlayerPromptModal";
 
 const Game: React.FC = (props) => {
-  const {showOptionsMenu} = useGameContext();
+  const {showOptionsMenu, showPlayerPromptModal} = useGameContext();
 
   return (
     <AppLayout showSidebar={true}>
@@ -18,6 +19,7 @@ const Game: React.FC = (props) => {
         <GameField/>
         <GameControls/>
         {showOptionsMenu ? <OptionsCard/> : <></>}
+        {showPlayerPromptModal ? <PlayerPromptModal /> : <></>}
       </div>
     </AppLayout>
   );

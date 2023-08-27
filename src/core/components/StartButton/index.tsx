@@ -10,7 +10,7 @@ import ScoreDisplay from "@/core/components/ScoreDisplay";
 
 const StartButton: React.FC = () => {
   const {currentGameStatus, setCurrentGameStatus, showStartTimer, showPauseInterface, showOptionsMenu} = useGameContext();
-  let rise = currentGameStatus !== GameStatus.Paused ? {} : {zIndex: 11};
+  let rise = currentGameStatus !== GameStatus.Paused || showOptionsMenu ? {zIndex: 1} : {zIndex: 11};
 
   if (currentGameStatus === GameStatus.InGame || currentGameStatus === GameStatus.Paused) {
     return (

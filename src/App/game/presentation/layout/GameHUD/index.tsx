@@ -11,8 +11,7 @@ import OptionsButton from "@/core/components/OptionsButton";
 
 const GameHUD: React.FC = () => {
   const {currentGameStatus, showOptionsMenu} = useGameContext();
-  let rise = currentGameStatus !== GameStatus.Paused ? {} : {zIndex: 11};
-  rise = showOptionsMenu ? {zIndex: 1} : {zIndex: 11};
+  let rise = currentGameStatus !== GameStatus.Paused || showOptionsMenu ? {zIndex: 1} : {zIndex: 11};
 
   return (
     <div className={styles.container} style={rise}>
