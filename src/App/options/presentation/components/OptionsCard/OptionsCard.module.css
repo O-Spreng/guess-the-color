@@ -43,6 +43,9 @@
   padding: 12px 24px;
   cursor: pointer;
 }
+.btn:disabled {
+  opacity: 50%;
+}
 .btn:not(:last-child) {
   border-right: none;
 }
@@ -58,6 +61,9 @@
   border: 2px solid #919295;
   padding: 12px 24px;
   border-radius: 4px;
+}
+.reset:disabled {
+  opacity: 50%;
 }
 
 .reset:hover {

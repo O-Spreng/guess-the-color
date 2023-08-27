@@ -3,10 +3,10 @@ import {GameDifficulty, GameStatus} from "@/core/utils/enums";
 import {defaultProps, GameContextObject, Match, Move} from "@/core/utils/types";
 import {generateRandomColor, shuffleArray} from "@/core/services";
 import {
-  getFirstAccess,
+  getFirstAccess, getGameDifficulty,
   getHighScoreFromStorage,
   getLastMatchFromStorage,
-  resetAllData, setFirstAccess,
+  resetAllData, setFirstAccess, setGameDifficulty,
   setHighScoreToStorage,
   setLastMatchToStorage,
   setLeaderboardToStorage
@@ -14,7 +14,7 @@ import {
 
 
 const GameContext = createContext<GameContextObject>({
-  difficulty: GameDifficulty.Hard,
+  difficulty: GameDifficulty.Easy,
   highScore: 0,
   attempt: {} as Move,
   match: {} as Match,
@@ -27,24 +27,16 @@ const GameContext = createContext<GameContextObject>({
   showPauseInterface: false,
   currentMatchTimer: 30,
   currentAttemptTimer: 10,
-  setCurrentGameStatus: ( origin: string) => {
-  },
-  setShowStartTimer: (show: boolean) => {
-  },
-  setShowOptionsMenu: (show: boolean) => {
-  },
-  setShowPauseInterface: (show: boolean) => {
-  },
-  setCurrentMatchTimer: (value: number) => {
-  },
-  setCurrentAttemptTimer: (value: number) => {
-  },
-  selectColor: (color: string) => {
-  },
-  startNewMatch: () => {
-  },
-  resetAllData: () => {
-  }
+  setDifficulty: (newDifficulty: GameDifficulty) => {},
+  setCurrentGameStatus: ( origin: string) => {},
+  setShowStartTimer: (show: boolean) => {},
+  setShowOptionsMenu: (show: boolean) => {},
+  setShowPauseInterface: (show: boolean) => {},
+  setCurrentMatchTimer: (value: number) => {},
+  setCurrentAttemptTimer: (value: number) => {},
+  selectColor: (color: string) => {},
+  startNewMatch: () => {},
+  resetAllData: () => {}
 });
 
 export const GameContextProvider: React.FC<defaultProps> = (props) => {
@@ -61,8 +53,9 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
   const [attempt, setAttempt] = useState<Move>(emptyAttempt);
   const [match, setMatch] = useState<Match>(emptyMatch);
   const [lastMatch, setLastMatch] = useState<Match>(emptyMatch);
-  const [difficulty, setDifficulty] = useState<GameDifficulty>(GameDifficulty.Hard)
+  const [difficulty, setDifficulty] = useState<GameDifficulty>(GameDifficulty.Easy)
   const [highScore, setHighScore] = useState<number>(0);
+
 
   useEffect(() => {
     if (getFirstAccess() === 0) {
@@ -71,7 +64,12 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     }
     setHighScore(getHighScoreFromStorage());
     setLastMatch(getLastMatchFromStorage());
+    setDifficulty(getGameDifficulty());
   }, []);
+
+  useEffect(() => {
+    setGameDifficulty(difficulty);
+  }, [difficulty]);
 
   useEffect(() => {
     let matchInterval: any;
@@ -227,6 +225,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     showPauseInterface: showPauseInterface,
     currentMatchTimer: currMatchTimer,
     currentAttemptTimer: currAttemptTimer,
+    setDifficulty: setDifficulty,
     setCurrentGameStatus: handleStatusChange,
     setShowStartTimer: setShowStartTimer,
     setShowOptionsMenu: setShowOptionsMenu,

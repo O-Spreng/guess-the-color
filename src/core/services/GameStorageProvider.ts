@@ -1,5 +1,5 @@
 import {Match, Move} from "@/core/utils/types";
-import {StorageKey} from "@/core/utils/enums";
+import {GameDifficulty, StorageKey} from "@/core/utils/enums";
 
 
 const emptyMatch: Match = {id: '', player: '', currentScore: 0, currentMatchMoves: [] as Move[]}
@@ -44,11 +44,20 @@ export const resetAllData = () => {
 }
 
 export const setFirstAccess = () => {
-  localStorage?.setItem('FIRST_ACCESS', '1');
+  localStorage?.setItem(StorageKey.FirstAccess, '1');
 }
 
 export const getFirstAccess = () :number => {
-  const retrievedData= localStorage?.getItem('FIRST_ACCESS');
+  const retrievedData= localStorage?.getItem(StorageKey.FirstAccess);
+  return retrievedData ? +retrievedData: 0;
+}
+
+export const setGameDifficulty = (difficulty: GameDifficulty) => {
+  localStorage?.setItem(StorageKey.Difficulty, String(difficulty));
+}
+
+export const getGameDifficulty = () :number => {
+  const retrievedData= localStorage?.getItem(StorageKey.Difficulty);
   return retrievedData ? +retrievedData: 0;
 }
 

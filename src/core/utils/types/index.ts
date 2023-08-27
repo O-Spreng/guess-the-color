@@ -37,6 +37,7 @@ export type GameContextObject = {
   showOptionsMenu: boolean,
   currentMatchTimer: number,
   currentAttemptTimer: number,
+  setDifficulty: (newDifficulty: GameDifficulty) => void,
   setCurrentGameStatus: (origin: string) => void,
   setShowStartTimer: (show: boolean) => void,
   setShowOptionsMenu: (show: boolean) => void,
