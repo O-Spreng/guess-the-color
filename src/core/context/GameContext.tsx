@@ -14,7 +14,7 @@ import {
 
 
 const GameContext = createContext<GameContextObject>({
-  difficulty: GameDifficulty.Easy,
+  difficulty: GameDifficulty.Hard,
   highScore: 0,
   attempt: {} as Move,
   match: {} as Match,
@@ -23,12 +23,15 @@ const GameContext = createContext<GameContextObject>({
   correctColor: '',
   currentGameStatus: GameStatus.Stopped,
   showStartTimer: false,
+  showOptionsMenu: false,
   showPauseInterface: false,
   currentMatchTimer: 30,
   currentAttemptTimer: 10,
-  setCurrentGameStatus: (status: GameStatus, origin: string) => {
+  setCurrentGameStatus: ( origin: string) => {
   },
   setShowStartTimer: (show: boolean) => {
+  },
+  setShowOptionsMenu: (show: boolean) => {
   },
   setShowPauseInterface: (show: boolean) => {
   },
@@ -49,6 +52,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
   let emptyMatch: Match = {id: '', player: '', currentScore: 0, currentMatchMoves: [] as Move[]}
   const [currentGameStatus, setCurrentGameStatus] = useState<GameStatus>(GameStatus.Stopped);
   const [showStartTimer, setShowStartTimer] = useState<boolean>(false);
+  const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
   const [showPauseInterface, setShowPauseInterface] = useState<boolean>(false);
   const [currMatchTimer, setCurrMatchTimer] = useState<number>(0);
   const [currAttemptTimer, setCurrAttemptTimer] = useState<number>(0);
@@ -57,7 +61,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
   const [attempt, setAttempt] = useState<Move>(emptyAttempt);
   const [match, setMatch] = useState<Match>(emptyMatch);
   const [lastMatch, setLastMatch] = useState<Match>(emptyMatch);
-  const [difficulty, setDifficulty] = useState<GameDifficulty>(GameDifficulty.Easy)
+  const [difficulty, setDifficulty] = useState<GameDifficulty>(GameDifficulty.Hard)
   const [highScore, setHighScore] = useState<number>(0);
 
   useEffect(() => {
@@ -105,7 +109,9 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
   }, [currMatchTimer, currAttemptTimer, currentGameStatus, match, startNewAttempt, selectColor, highScore, resetAllData]);
 
 
-  function handleStatusChange(status: GameStatus, origin: string) {
+
+  // TODO: CORRIGIR ESSA FUNÇÃO INUTIL
+  function handleStatusChange( origin: string) {
     if (currentGameStatus === GameStatus.Stopped && origin === 'start') {
       setShowStartTimer(true);
     }
@@ -118,6 +124,14 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     if (currentGameStatus === GameStatus.Paused && origin === 'pause') {
       setShowPauseInterface(false)
       setCurrentGameStatus(GameStatus.InGame);
+    }
+
+    if (currentGameStatus === GameStatus.Paused && origin === 'exit') {
+      setShowPauseInterface(false)
+      setCurrentGameStatus(GameStatus.Stopped);
+      setMatch(emptyMatch);
+      setAttempt(emptyAttempt);
+      setCurrMatchTimer(0);
     }
 
 
@@ -167,7 +181,8 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     }
     setCurrentGameStatus(GameStatus.InGame);
     setMatch(prevState => newMatch);
-    startNewAttempt();}
+    startNewAttempt();
+  }
 
   function selectColor(color: string) {
     let currentAttempt: Move = {
@@ -192,6 +207,12 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     startNewAttempt();
   }
 
+  const destroyStoredData = () => {
+    resetAllData();
+    setHighScore(getHighScoreFromStorage());
+    setLastMatch(getLastMatchFromStorage());
+  }
+
 
   const contextValue: GameContextObject = {
     difficulty: difficulty,
@@ -203,17 +224,19 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     correctColor: correctColor,
     currentGameStatus: currentGameStatus,
     showStartTimer: showStartTimer,
+    showOptionsMenu: showOptionsMenu,
     showPauseInterface: showPauseInterface,
     currentMatchTimer: currMatchTimer,
     currentAttemptTimer: currAttemptTimer,
     setCurrentGameStatus: handleStatusChange,
     setShowStartTimer: setShowStartTimer,
+    setShowOptionsMenu: setShowOptionsMenu,
     setShowPauseInterface: setShowPauseInterface,
     setCurrentMatchTimer: setCurrMatchTimer,
     setCurrentAttemptTimer: setCurrAttemptTimer,
     selectColor: selectColor,
     startNewMatch: startNewMatch,
-    resetAllData: resetAllData
+    resetAllData: destroyStoredData
   }
 
   return (

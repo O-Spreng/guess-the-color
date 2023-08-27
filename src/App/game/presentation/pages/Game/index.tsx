@@ -5,22 +5,21 @@ import GameControls from '../../layout/GameControls';
 
 import styles from './Game.module.css';
 import AppLayout from "@/core/layout/AppLayout";
-import {GameContextProvider} from "@/core/context/GameContext";
 import OptionsCard from "@/App/options/presentation/components/OptionsCard";
+import {useGameContext} from "@/core/context/GameContext";
 
 const Game: React.FC = (props) => {
+  const {showOptionsMenu} = useGameContext();
 
   return (
-    <GameContextProvider >
-      <AppLayout showSidebar={true}>
-        <div className={styles.container}>
-          <GameHUD/>
-          <GameField/>
-          <GameControls/>
-          {/*<OptionsCard/>*/}
-        </div>
-      </AppLayout>
-    </GameContextProvider>
+    <AppLayout showSidebar={true}>
+      <div className={styles.container}>
+        <GameHUD/>
+        <GameField/>
+        <GameControls/>
+        {showOptionsMenu ? <OptionsCard/> : <></>}
+      </div>
+    </AppLayout>
   );
 }
 

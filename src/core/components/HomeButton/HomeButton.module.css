@@ -1,0 +1,21 @@
+.container {
+  width: 35%;
+  text-align: center;
+  height: 100%;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  transition: background .2s ease-in, color .2s ease-in;
+  background: #c6c6c6;
+  color: inherit;
+  text-transform: uppercase;
+}
+
+.container:hover {
+  background: #fb3737;
+  color: #511010;
+}
