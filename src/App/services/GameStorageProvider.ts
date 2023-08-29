@@ -56,6 +56,6 @@ export const setGameDifficulty = (difficulty: GameDifficulty) => {
 
 export const getGameDifficulty = () :number => {
   const retrievedData= typeof window !== "undefined" ? window.localStorage.getItem(StorageKey.Difficulty) : false;
-  return retrievedData ? +retrievedData : 0;
+  return retrievedData ? +retrievedData : 3;
 }
 
