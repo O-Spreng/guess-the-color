@@ -1,0 +1,70 @@
+.container {
+  border: 2px solid #919295;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 400;
+  background: #f3f3f3;
+  text-transform: uppercase;
+  transition: background .2s ease-in, font-weight .2s ease-in, color .2s ease-in;
+}
+
+.container:hover {
+  background: #c6c6c6;
+  font-weight: 600;
+}
+
+.wrong {
+  animation-name: shake;
+  position: relative;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+}
+
+.wrong,
+.wrong:hover {
+  border-color: #511010;
+  background: #fb3737;
+  color: #511010;
+}
+
+.right,
+.right:hover {
+  border: 2px solid #255427;
+  background: #7bdb80;
+  color: #255427;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 8px 12px;
+  }
+}
+
+@keyframes shake {
+  0% {
+    left: 0
+  }
+  1% {
+    left: -2px
+  }
+  2% {
+    left: 3px
+  }
+  3% {
+    left: -5px
+  }
+  4% {
+    left: 5px
+  }
+  5% {
+    left: -3px
+  }
+  6% {
+    left: 2px
+  }
+  7% {
+    left: 0
+  }
+}
+

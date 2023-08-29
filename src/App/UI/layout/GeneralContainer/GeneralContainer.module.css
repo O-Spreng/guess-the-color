@@ -1,0 +1,25 @@
+.container {
+  background: #e8e8e8;
+  margin: 32px auto;
+  padding: 32px;
+  max-width: 80%;
+  min-width: 448px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 4px dashed #4b4b4b;
+  border-radius: 16px;
+}
+
+@media (max-width: 480px) {
+  .container {
+    min-width: unset;
+    max-width: unset;
+    width: 90%;
+    font-size: 0.8em;
+  }
+}
+

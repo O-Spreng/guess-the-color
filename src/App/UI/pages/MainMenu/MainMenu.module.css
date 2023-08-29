@@ -1,0 +1,12 @@
+.btn{
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', cursive;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+
+.btn:hover{
+  color: #4B4B4BA9;
+  text-shadow: -2px -2px 0 #484848;
+}

@@ -1,0 +1,32 @@
+.container {
+  width: 35%;
+  text-align: center;
+  height: 100%;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  transition: background .2s ease-in, color .2s ease-in;
+  background: #c6c6c6;
+  color: inherit;
+  text-transform: uppercase;
+}
+
+.container:hover {
+  background: #7babdb;
+  color: #253b54;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 30%;
+    font-family: unset;
+    background: #7babdb;
+    color: #253b54;
+    font-size: 2.5em;
+    font-weight: bolder;
+  }
+}

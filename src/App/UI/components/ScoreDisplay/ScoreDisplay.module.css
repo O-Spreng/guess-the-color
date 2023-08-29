@@ -1,0 +1,31 @@
+.scores {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  width: 35%;
+  background: transparent;
+}
+.scores hr {
+  width: 100%;
+  border: none;
+  border-top: 2px solid #919295;
+}
+.scoreRow {
+  height: 100%;
+  padding: 0 8px;
+  display: flex;
+  background: transparent;
+  flex-flow: row nowrap;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  line-height: 100%;
+}
+
+.scoreRow .value {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: normal;
+}

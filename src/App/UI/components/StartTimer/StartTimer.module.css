@@ -1,0 +1,45 @@
+.container {
+  z-index: 10;
+  height: 30vh;
+  width: 45vh;
+  display: flex;
+  background: transparent;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  gap: 32px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.text {
+  margin: 0 16px;
+  color: #00ffff;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-shadow: 3px 3px 2px rgba(253, 69, 252, 1),4px 4px 17px rgba(0, 0, 0, 0.85);
+}
+
+.sec,
+.go {
+  color: #00ffff;
+  font-size: 8em;
+  font-weight: bold;
+  text-shadow: 3px 3px 2px rgba(253, 69, 252, 1),4px 4px 17px rgba(0, 0, 0, 0.85);
+}
+
+@media (max-width: 480px) {
+  .go {
+    font-size: 2.5em;
+  }
+}
+@media (max-width: 768px) {
+  .go {
+    font-size: 5em;
+  }
+}
+
+
+
+
+
