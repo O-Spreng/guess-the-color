@@ -2,7 +2,8 @@
   background: #dbdee4;
   margin: 32px auto;
   padding: 32px 32px 64px;
-  width: 40%;
+  width: 100%;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -12,5 +13,15 @@
   border: 8px double #919295;
   border-radius: 4px;
   font-family: 'Press Start 2P', cursive;
-
+}
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    font-size: 0.8em;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    width: 80%;
+  }
 }

@@ -48,3 +48,26 @@
   background: #7bdb80;
   color: #255427;
 }
+
+@media (max-width: 480px) {
+  .container {
+    -webkit-tap-highlight-color: transparent;
+    max-width: 40%;
+  }
+  .btn{
+    max-width: 40%;
+    -webkit-tap-highlight-color: transparent;
+    background: #7bdb80;
+    color: #255427;
+  }
+  .pauseBtn{
+    -webkit-tap-highlight-color: transparent;
+    color: #512710;
+    background: #fb8237;
+  }
+  .restartBtn{
+    -webkit-tap-highlight-color: transparent;
+    background: #fb3737;
+    color: #511010;
+  }
+}

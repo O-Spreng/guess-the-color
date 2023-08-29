@@ -19,3 +19,11 @@
   background: #fb3737;
   color: #511010;
 }
+
+@media (max-width: 480px) {
+  .container {
+    width: 30%;
+    background: #fb3737;
+    color: #511010;
+  }
+}

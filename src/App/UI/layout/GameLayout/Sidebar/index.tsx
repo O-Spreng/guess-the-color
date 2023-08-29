@@ -5,7 +5,6 @@ import {GameStatus} from "@/App/utils/enums";
 import {useGameContext} from "@/App/context/GameContext";
 import PlayedMove from "@/App/UI/components/PlayedMove";
 
-
 function Sidebar() {
   const {match, lastMatch, currentGameStatus} = useGameContext();
   let currMatch= currentGameStatus === GameStatus.InGame || currentGameStatus === GameStatus.Paused ? match : lastMatch;

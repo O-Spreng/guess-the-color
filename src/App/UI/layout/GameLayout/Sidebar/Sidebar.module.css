@@ -6,6 +6,7 @@
   box-shadow: 8px 4px 12px 2px rgba(0,0,0,0.24);
   display: flex;
   flex-direction: column;
+  z-index: 3;
 }
 .head {
   background: #eceff5;
@@ -49,4 +50,12 @@
   overflow-y: scroll;
   flex-grow: 1;
   flex-shrink: 1;
+}
+
+@media (max-width: 860px){
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }

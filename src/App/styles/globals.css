@@ -13,16 +13,34 @@ body {
   overflow: hidden;
   font-family: 'Roboto Mono', sans-serif;
   color: #4b4b4b;
+  cursor: default;
 }
 
-button, input[type="submit"], input[type="reset"] {
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus, button:focus-visible,
+button:focus-within, button:active,
+a:focus,a:visited,a:active {
+  outline: none;
+}
+
+
+button, input[type="submit"], input[type="reset"]
+
+{
   background: none;
   color: inherit;
   border: none;
   padding: 0;
   font: inherit;
   cursor: pointer;
-  outline: inherit;
+  outline: none;
 }
 
 a {

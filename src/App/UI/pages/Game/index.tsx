@@ -8,18 +8,22 @@ import GameField from "@/App/UI/layout/GameLayout/GameField";
 import GameControls from "@/App/UI/layout/GameLayout/GameControls";
 import OptionsCard from "@/App/UI/layout/OptionsCard";
 import PlayerPromptModal from "@/App/UI/layout/PlayerPromptModal";
+import useDeviceDetect from "@/App/hooks/useDeviceDetect";
+import MobileOptions from "@/App/UI/components/MobileOptions";
 
 const Game: React.FC = (props) => {
+  const {isExtraSmallDevice, isSmallDevice} = useDeviceDetect();
   const {showOptionsMenu, showPlayerPromptModal} = useGameContext();
 
   return (
     <AppLayout showSidebar={true}>
       <div className={styles.container}>
-        <GameHUD/>
+        {!isExtraSmallDevice ? <GameHUD/>: <></>}
         <GameField/>
-        <GameControls/>
+        {!isExtraSmallDevice ? <GameControls/>: <></>}
         {showOptionsMenu ? <OptionsCard/> : <></>}
         {showPlayerPromptModal ? <PlayerPromptModal /> : <></>}
+        { isSmallDevice ? <MobileOptions /> : <></>}
       </div>
     </AppLayout>
   );

@@ -11,3 +11,8 @@
   align-items: center;
   background: #f3f3f3;
 }
+@media (max-width: 480px) {
+  .container {
+    max-width: unset;
+  }
+}

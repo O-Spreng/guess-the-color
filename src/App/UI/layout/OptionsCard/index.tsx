@@ -6,7 +6,7 @@ import OptionsContainer from "@/App/UI/layout/OptionsContainer/ index";
 import {GameDifficulty, GameStatus} from "@/App/utils/enums";
 
 function OptionsCard() {
-  const {setShowOptionsMenu, resetAllData, difficulty, setDifficulty, currentGameStatus} = useGameContext();
+  const {setShowOptionsMenu, resetAllData, difficulty, setDifficulty, currentGameStatus, enableExperimentalFeedback, setEnableExperimentalFeedback} = useGameContext();
   const [active, setActive] = useState<GameDifficulty>(difficulty);
   let isDisable = currentGameStatus === GameStatus.Paused;
 
@@ -14,12 +14,14 @@ function OptionsCard() {
     setShowOptionsMenu(false)
   }
 
+  function handleExperimentalFeatures() {
+    setEnableExperimentalFeedback(!enableExperimentalFeedback);
+  }
+
   function handleDifficultyChange(newDifficulty: GameDifficulty) {
     if (isDisable) {
-      console.log('Difficulty change not allowed ');
       return;
     }
-    console.log('Changing difficulty');
     setDifficulty(newDifficulty);
     setActive(newDifficulty);
   }
@@ -47,7 +49,11 @@ function OptionsCard() {
         <p>DANGER ZONE</p>
         <span>&#9762;</span>
       </div>
-      <button className={styles.reset} onClick={resetAllData} disabled={isDisable}>Reset all data</button>
+      <p>Turn On Experimental Control Visual Feedback</p>
+      <button className={styles.experimental} onClick={handleExperimentalFeatures}>{enableExperimentalFeedback? 'Turn off': 'Turn On'}</button>
+      <p>Clear All Game Data.</p>
+      <button className={styles.reset} onClick={resetAllData} disabled={isDisable}>Reset All Data</button>
+      <p>Caution, all records will be lost forever.</p>
     </OptionsContainer>
   );
 }

@@ -3,13 +3,13 @@
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 400;
-  background: #fffdf6;
+  background: #f3f3f3;
   text-transform: uppercase;
   transition: background .2s ease-in, font-weight .2s ease-in, color .2s ease-in;
 }
 
 .container:hover {
-  background: #f3f3f3;
+  background: #c6c6c6;
   font-weight: 600;
 }
 
@@ -35,6 +35,11 @@
   color: #255427;
 }
 
+@media (max-width: 480px) {
+  .container {
+    padding: 8px 12px;
+  }
+}
 
 @keyframes shake {
   0% {

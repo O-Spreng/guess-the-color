@@ -1,6 +1,6 @@
 .content {
-  padding: 24px 32px;
-  width: 80%;
+  width: 100%;
+  min-width: 80vw;
   max-height: 360px;
   overflow-y: scroll;
   display: inherit;
@@ -24,7 +24,7 @@
   text-transform: uppercase;
 }
 
-.closeBtn:hover{
+.closeBtn:hover {
   color: #4B4B4BA9;
   text-shadow: -2px -2px 0 #484848;
 }
@@ -54,8 +54,22 @@
   content: '';
   width: 100%;
 
-  background-image: linear-gradient(to right, #4b4b4b 33%, rgba(255,255,255,0) 0%);
+  background-image: linear-gradient(to right, #4b4b4b 33%, rgba(255, 255, 255, 0) 0%);
   background-position: bottom;
   background-size: 12px 4px;
   background-repeat: repeat-x;
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 16px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 24px 32px;
+    width: 100%;
+  }
 }

@@ -39,7 +39,7 @@
 .btn {
   font-family: 'Press Start 2P', cursive;
   line-height: 200%;
-  border: 2px solid #919295 ; /* Green border */
+  border: 2px solid #919295 ;
   padding: 12px 24px;
   cursor: pointer;
 }
@@ -57,14 +57,17 @@
   color: #fafafa;
 }
 
+.experimental,
 .reset {
   border: 2px solid #919295;
   padding: 12px 24px;
   border-radius: 4px;
 }
+
 .reset:disabled {
   opacity: 50%;
 }
+
 
 .reset:hover {
   border-color: #511010;
@@ -77,3 +80,16 @@
   text-shadow: -2px -2px 0 #fafafa;
   background: #511010;
 }
+
+.experimental:hover {
+  border-color: #253b54;
+  background: #7babdb;
+  color: #253b54;
+}
+
+.experimental:active {
+  color: #4B4B4BA9;
+  text-shadow: -2px -2px 0 #fafafa;
+  background: #253b54;
+}
+

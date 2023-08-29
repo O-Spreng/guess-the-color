@@ -30,6 +30,10 @@ const GameContext = createContext<GameContextObject>({
   showPlayerPromptModal: false,
   currentMatchTimer: 30,
   currentAttemptTimer: 10,
+  enableExperimentalFeedback: false,
+  sidebarOpen: false,
+  setSidebarOpen: (show: boolean) => {},
+  setEnableExperimentalFeedback: (enable: boolean) => {},
   setDifficulty: (newDifficulty: GameDifficulty) => {},
   setCurrentGameStatus: ( origin: string) => {},
   setShowStartTimer: (show: boolean) => {},
@@ -60,9 +64,12 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
   const [lastMatch, setLastMatch] = useState<Match>(emptyMatch);
   const [difficulty, setDifficulty] = useState<GameDifficulty>(GameDifficulty.Easy)
   const [highScore, setHighScore] = useState<number>(0);
+  const [experimentalFeedbackOn, setExperimentalFeedbackOn] = useState<boolean>(false);
+  const [sidebarOpen, setSidebarOpen ] = useState<boolean>(true)
 
   useEffect(() => {
-    if (getFirstAccess() === 0) {
+    const firstAccess = getFirstAccess();
+    if (firstAccess === 0 || firstAccess === undefined) {
       setFirstAccess();
       resetAllData();
     }
@@ -108,7 +115,7 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
       clearInterval(matchInterval);
       clearInterval(attemptInterval);
     }
-  }, [currMatchTimer, currAttemptTimer, currentGameStatus, match, startNewAttempt, selectColor, highScore, resetAllData]);
+  }, [currMatchTimer, currAttemptTimer, currentGameStatus, match, startNewAttempt, selectColor, highScore, endCurrentMatch]);
 
   function handleStatusChange( origin: string) {
     if (currentGameStatus === GameStatus.Stopped && origin === 'start') {
@@ -229,6 +236,10 @@ export const GameContextProvider: React.FC<defaultProps> = (props) => {
     showPlayerPromptModal: showPlayerPromptModal,
     currentMatchTimer: currMatchTimer,
     currentAttemptTimer: currAttemptTimer,
+    enableExperimentalFeedback: experimentalFeedbackOn,
+    sidebarOpen: sidebarOpen,
+    setSidebarOpen: setSidebarOpen,
+    setEnableExperimentalFeedback: setExperimentalFeedbackOn,
     setDifficulty: setDifficulty,
     setCurrentGameStatus: handleStatusChange,
     setShowStartTimer: setShowStartTimer,

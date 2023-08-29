@@ -7,6 +7,8 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-evenly;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
 }
 
 .text {
@@ -17,6 +19,13 @@
   font-family: 'Press Start 2P', cursive;
 }
 .warn {
-  color: #fb3737;
+  background: #fb3737;
+  color: #511010;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 30%;
+  }
 }
 
