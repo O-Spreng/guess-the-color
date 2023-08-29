@@ -1,4 +1,4 @@
-<h4 align="center"><a href="">Live Preview</a></h4>
+<h4 align="center"><a href="https://guess-the-color-eosin.vercel.app/">Live Preview</a></h4>
 
 <p align="center">GUESS THE COLOR is a game were the objective consists in identify as many colors as possible within a 30-second timeframe.</p>
 
